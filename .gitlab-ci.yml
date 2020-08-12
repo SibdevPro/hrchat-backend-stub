@@ -8,12 +8,24 @@ before_script:
   - apk update && apk add bash
 
 stages:
+  - lint
   - test
+
+lint:
+  stage: lint
+  image:
+    name: docker/compose:1.25.5
+  script:
+    - docker-compose -f docker-compose.yml build
+    - docker-compose -f docker-compose.yml run server flake8 --version
+    - docker-compose -f docker-compose.yml run server flake8 --config=.flake8 --statistics
+  only:
+    - merge_request
 
 test:
   stage: test
   image:
-    name: docker/compose:latest
+    name: docker/compose:1.25.5
   script:
     - echo $CI_COMMIT_REF_SLUG
     - docker-compose build
