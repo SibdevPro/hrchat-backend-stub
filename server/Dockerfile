@@ -1,6 +1,6 @@
-FROM python:3.7-slim
+FROM python:3.7.5-slim
 
-RUN mkdir /server && apt-get update && apt-get install -y git
+RUN mkdir /server && apt-get update && apt-get install -y git libpq-dev
 WORKDIR /server
 
 ADD ./server/requirements/dev.txt /server/requirements.txt

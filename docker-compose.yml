@@ -17,7 +17,7 @@ services:
           BROKER_URL: 'amqp://user:password@rabbitmq:5672/my_vhost'
 
     db:
-        image: postgres:11.2
+        image: postgres:11.2-alpine
         environment:
             POSTGRES_DB: postgres
             POSTGRES_USER: postgres
